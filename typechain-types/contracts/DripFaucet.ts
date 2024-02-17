@@ -7,6 +7,7 @@ import type {
   FunctionFragment,
   Result,
   Interface,
+  AddressLike,
   ContractRunner,
   ContractMethod,
   Listener,
@@ -20,13 +21,23 @@ import type {
 } from "../common";
 
 export interface DripFaucetInterface extends Interface {
-  getFunction(nameOrSignature: "requestTokens"): FunctionFragment;
+  getFunction(
+    nameOrSignature: "getNextBuyTime" | "requestTokens"
+  ): FunctionFragment;
 
   encodeFunctionData(
+    functionFragment: "getNextBuyTime",
+    values: [AddressLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "requestTokens",
-    values?: undefined
+    values: [AddressLike]
   ): string;
 
+  decodeFunctionResult(
+    functionFragment: "getNextBuyTime",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "requestTokens",
     data: BytesLike
@@ -76,15 +87,28 @@ export interface DripFaucet extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
-  requestTokens: TypedContractMethod<[], [void], "nonpayable">;
+  getNextBuyTime: TypedContractMethod<
+    [recipient: AddressLike],
+    [bigint],
+    "view"
+  >;
+
+  requestTokens: TypedContractMethod<
+    [recipient: AddressLike],
+    [void],
+    "nonpayable"
+  >;
 
   getFunction<T extends ContractMethod = ContractMethod>(
     key: string | FunctionFragment
   ): T;
 
   getFunction(
+    nameOrSignature: "getNextBuyTime"
+  ): TypedContractMethod<[recipient: AddressLike], [bigint], "view">;
+  getFunction(
     nameOrSignature: "requestTokens"
-  ): TypedContractMethod<[], [void], "nonpayable">;
+  ): TypedContractMethod<[recipient: AddressLike], [void], "nonpayable">;
 
   filters: {};
 }

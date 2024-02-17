@@ -8,6 +8,8 @@ dotenv.config();
 // in its dashboard, and replace "KEY" with it
 const INFURA_API_KEY = process.env.INFURA_API_KEY;
 const SEPOLIA_PRIVATE_KEY = process.env.SEPOLIA_PRIVATE_KEY ?? ""
+const CUSTOM_PRIVATE_KEY = process.env.CUSTOM_PRIVATE_KEY ?? ""
+
 
 
 // Replace this private key with your Sepolia account private key
@@ -23,6 +25,10 @@ const config: HardhatUserConfig = {
     sepolia: {
       url: `https://sepolia.infura.io/v3/${INFURA_API_KEY}`,
       accounts: [SEPOLIA_PRIVATE_KEY]
+    },
+    custom: {
+      url: `http://127.0.0.1:7545`,
+      accounts: [CUSTOM_PRIVATE_KEY]
     }
   }
 };

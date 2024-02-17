@@ -24,3 +24,7 @@ main().catch((error) => {
   console.error(error);
   process.exitCode = 1;
 });
+
+
+// TODO: Contract working as it should. But:
+// 1. I need to have some DRP token on the faucet. I need to set this on the deploy script??

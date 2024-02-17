@@ -229,8 +229,8 @@
       ]
     },
     "/home/jeronimo/study/erc20-faucet/contracts/DripFaucet.sol": {
-      "lastModificationDate": 1707764991011,
-      "contentHash": "02e6065a145ff546f6cea83f6854564b",
+      "lastModificationDate": 1707857676188,
+      "contentHash": "329c6acde1b0f1bde3ffd17d0685bfe2",
       "sourceName": "contracts/DripFaucet.sol",
       "solcConfig": {
         "version": "0.8.20",
